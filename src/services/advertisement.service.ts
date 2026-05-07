@@ -23,12 +23,16 @@ export interface OwnerUu extends BaseEntity {
 
 export interface ProvinceInfo {
   code: string;
+  name: string;
+  nameEn: string;
   fullName: string;
   fullNameEn: string;
 }
 
 export interface WardInfo {
   code: string;
+  name: string;
+  nameEn: string;
   fullName: string;
   fullNameEn: string;
   provinceCode: string;
@@ -108,6 +112,7 @@ export interface AdvertisementData {
   updateDate?: string;
   viewCount?: number;
   startDate?: string;
+  isJoinPromo?: number;
   id: number;
   uuid: string;
   status: number;
@@ -138,6 +143,7 @@ export interface AdvertisementDetailData {
   canPreDeposit: boolean;
   userPreDeposit: string | null;
   roomFurnitures: unknown | null;
+  isJoinPromo?: number;
   id: number;
   uuid: string;
   status: number;

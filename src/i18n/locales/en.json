@@ -50,7 +50,8 @@
     "depositNotice": "Deposit via App",
     "depositDownloadApp": "To make a deposit, please download the XanhStay app on your phone.",
     "preDeposit": "Booking deposit",
-    "room": "Room"
+    "room": "Room",
+    "promo": "Promo"
   },
   "detail": {
     "back": "Back",
@@ -67,7 +68,10 @@
     "notFoundDesc": "This listing does not exist or has been removed.",
     "notFoundMsg": "Listing not found.",
     "backToSearch": "← Back to search",
-    "loadError": "Unable to load listing details."
+    "loadError": "Unable to load listing details.",
+    "promoTitle": "Promotion",
+    "promo6m": "3% rent discount for 6-month payment cycle",
+    "promo12m": "5% rent discount for 12-month payment cycle"
   },
   "search": {
     "title": "Search rooms & apartments",

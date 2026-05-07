@@ -56,7 +56,8 @@
     "preDeposit": "Đặt cọc giữ chỗ",
     "room": "Phòng",
     "saveLabel": "Lưu tin",
-    "savedLabel": "Tin đã lưu"
+    "savedLabel": "Tin đã lưu",
+    "promo": "Khuyến mại"
   },
   "detail": {
     "back": "Quay lại",
@@ -73,7 +74,10 @@
     "notFoundDesc": "Bài đăng không tồn tại hoặc đã bị xóa.",
     "notFoundMsg": "Không tìm thấy bài đăng.",
     "backToSearch": "← Quay lại tìm kiếm",
-    "loadError": "Không thể tải thông tin bài đăng."
+    "loadError": "Không thể tải thông tin bài đăng.",
+    "promoTitle": "Khuyến mại",
+    "promo6m": "Giảm 3% tiền thuê khi thanh toán theo chu kỳ 6 tháng",
+    "promo12m": "Giảm 5% tiền thuê khi thanh toán theo chu kỳ 12 tháng"
   },
   "search": {
     "title": "Tìm phòng, căn hộ cho thuê",

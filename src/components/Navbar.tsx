@@ -81,23 +81,27 @@ export const Navbar = () => {
 
           {/* Desktop nav links */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === link.to || (link.to.includes('?') && location.pathname === link.to.split('?')[0])
-                    ? isTransparent
-                      ? 'bg-white/20 text-white'
-                      : 'bg-accent text-accent-foreground'
-                    : isTransparent
-                      ? 'text-white/90 hover:text-white hover:bg-white/10'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(link => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    location.pathname === link.to || (link.to.includes('?') && location.pathname === link.to.split('?')[0])
+                      ? isTransparent
+                        ? 'bg-white/20 text-white'
+                        : 'bg-accent text-accent-foreground'
+                      : isTransparent
+                        ? 'text-white/90 hover:text-white hover:bg-white/10'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+                  }`}
+                >
+                  <Icon size={15} />
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop right actions */}

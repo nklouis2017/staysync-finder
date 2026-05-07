@@ -50,7 +50,8 @@
     "depositNotice": "アプリで敷金を支払う",
     "depositDownloadApp": "敷金を支払うには、XanhStayアプリをダウンロードしてください。",
     "preDeposit": "予約金",
-    "room": "部屋"
+    "room": "部屋",
+    "promo": "割引"
   },
   "detail": {
     "back": "戻る",
@@ -67,7 +68,10 @@
     "notFoundDesc": "この物件は存在しないか、削除されました。",
     "notFoundMsg": "物件が見つかりません。",
     "backToSearch": "← 検索に戻る",
-    "loadError": "物件情報を読み込めません。"
+    "loadError": "物件情報を読み込めません。",
+    "promoTitle": "プロモーション",
+    "promo6m": "6ヶ月一括払いで家賃3%割引",
+    "promo12m": "12ヶ月一括払いで家賃5%割引"
   },
   "search": {
     "title": "部屋・アパート検索",

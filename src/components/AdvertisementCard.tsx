@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Heart, CalendarCheck, Smartphone, Eye, Clock } from "lucide-react";
+import { MapPin, Heart, CalendarCheck, Smartphone, Eye, Clock, BadgePercent } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { AdvertisementData } from "@/services/advertisement.service";
@@ -29,14 +29,17 @@ interface AdvertisementCardProps {
 const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, priority = false }: AdvertisementCardProps) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const { isSaved, toggleSave } = useSavedRooms();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [scheduleOpen, setScheduleOpen] = useState(false);
   const [depositOpen, setDepositOpen] = useState(false);
   const apt = data?.apartmentUu;
   const firstImage = data?.images?.[0];
   const imageUrl = firstImage ? getImageUrl(firstImage) : "/placeholder.svg";
 
-  const locationParts = [apt?.ward?.fullName, apt?.province?.fullName].filter(Boolean);
+  const isVi = (i18n.language || "vi").toLowerCase().startsWith("vi");
+  const wardName = isVi ? apt?.ward?.name : (apt?.ward?.nameEn || apt?.ward?.name);
+  const provinceName = isVi ? apt?.province?.name : (apt?.province?.nameEn || apt?.province?.name);
+  const locationParts = [wardName, provinceName].filter(Boolean);
   const locationText = locationParts.length > 0 ? locationParts.join(", ") : "Đang cập nhật";
 
   const typeName = apt?.apartmentTypeUu?.name || t("listing.room");
@@ -72,8 +75,9 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
       className="group"
     >
       <Link to={`/advertisement/${data?.uuid}`} className="block overflow-hidden">
-        <div className="bg-card rounded-2xl overflow-hidden border border-border card-hover">
-          <div className="relative aspect-[3/2] overflow-hidden bg-muted">
+        <div className="bg-card rounded-2xl overflow-hidden border border-border card-hover flex flex-col">
+          <div className="flex flex-row sm:flex-col gap-3 sm:gap-0 p-2 sm:p-0">
+          <div className="relative w-[42%] shrink-0 aspect-[4/3] sm:w-full sm:aspect-[3/2] overflow-hidden bg-muted rounded-xl sm:rounded-none">
             {!imgLoaded && (
               <Skeleton className="absolute inset-0 w-full h-full rounded-none" />
             )}
@@ -106,19 +110,34 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
                 className={isSaved(data?.uuid) ? "fill-destructive text-destructive" : "text-muted-foreground"}
               />
             </button>
-            <div className="absolute top-3 left-3 bg-card/90 backdrop-blur px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-foreground">
+            <div className="hidden sm:block absolute bottom-3 right-3 bg-card/90 backdrop-blur px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-foreground">
               {typeName}
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-3 px-4">
-              <span className="text-white font-bold text-lg drop-shadow-sm">
+            {data?.isJoinPromo === 1 && (
+              <div className="hidden sm:flex absolute top-3 left-3 items-center gap-1 bg-emerald-600 text-white px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider shadow-md">
+                <BadgePercent size={12} />
+                {t("listing.promo")}
+              </div>
+            )}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent pt-8 pb-3 px-4 flex flex-col items-start gap-1">
+              <span className="text-white font-bold text-base sm:text-lg drop-shadow-sm whitespace-nowrap [font-size:clamp(0.8rem,3.6vw,1.125rem)] sm:[font-size:1.125rem]">
                 {formatVNPrice(data?.price ?? 0)}
                 <span className="text-white/80 text-sm font-normal">{t("listing.perMonth")}</span>
               </span>
+              {data?.isJoinPromo === 1 && (
+                <span className="sm:hidden inline-flex items-center gap-1 bg-emerald-600 text-white px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider shadow-sm">
+                  <BadgePercent size={10} />
+                  {t("listing.promo")}
+                </span>
+              )}
             </div>
           </div>
 
-          <div className="p-4 space-y-2">
-            <h3 className="font-semibold text-foreground text-sm truncate" title={data?.title || ""}>
+          <div className="py-1 sm:p-4 space-y-1.5 sm:space-y-2 flex-1 min-w-0 sm:flex-initial">
+            <h3
+              className="hidden sm:block font-semibold text-foreground text-sm truncate"
+              title={data?.title || ""}
+            >
               {data?.title || "Đang cập nhật"}
             </h3>
 
@@ -127,8 +146,15 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
               <span className="truncate">{locationText}</span>
             </p>
 
-            {showMeta && (
+
+
+            {(showMeta || (apt?.avgStars != null && apt.avgStars > 0)) && (
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                {apt?.avgStars != null && apt.avgStars > 0 && (
+                  <span className="flex items-center gap-1 text-yellow-500">
+                    ★ {apt.avgStars}
+                  </span>
+                )}
                 {viewCount != null && viewCount > 0 && (
                   <span className="flex items-center gap-1">
                     <Eye size={12} />
@@ -144,12 +170,15 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
               </div>
             )}
 
+            {/* Mobile: loại phòng riêng 1 dòng */}
+            <div className="sm:hidden text-xs text-muted-foreground font-medium">
+              {typeName}
+            </div>
+
+            {/* Size + rooms */}
             {statsParts.length > 0 && (
               <div className="bg-secondary rounded-lg px-3 py-2 text-xs text-muted-foreground font-medium">
                 {statsParts.join(" • ")}
-                {apt?.avgStars != null && apt.avgStars > 0 && (
-                  <span className="float-right text-yellow-500">★ {apt.avgStars}</span>
-                )}
               </div>
             )}
 
@@ -160,8 +189,19 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
               </p>
             )}
 
-            {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-2 pt-1">
+          </div>
+          </div>
+
+            {/* Title - mobile only, between info and action buttons */}
+            <h3
+              className="sm:hidden font-semibold text-foreground text-sm px-3 line-clamp-2"
+              title={data?.title || ""}
+            >
+              {data?.title || "Đang cập nhật"}
+            </h3>
+
+            {/* Action buttons - row 3, full width below */}
+            <div className="flex flex-row gap-2 px-3 pb-3 pt-2 sm:px-4 sm:pb-4">
               {/* Schedule button */}
               <Dialog open={scheduleOpen} onOpenChange={setScheduleOpen}>
                 <DialogTrigger asChild>
@@ -225,7 +265,6 @@ const AdvertisementCardImpl = ({ data, index = 0, showScheduleButton = false, pr
                 </DialogContent>
               </Dialog>
             </div>
-          </div>
         </div>
       </Link>
     </motion.div>

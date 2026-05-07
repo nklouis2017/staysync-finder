@@ -50,7 +50,8 @@
     "depositNotice": "通过应用支付押金",
     "depositDownloadApp": "要支付押金，请在手机上下载XanhStay应用。",
     "preDeposit": "预订金",
-    "room": "房间"
+    "room": "房间",
+    "promo": "优惠"
   },
   "detail": {
     "back": "返回",
@@ -67,7 +68,10 @@
     "notFoundDesc": "该房源不存在或已删除。",
     "notFoundMsg": "未找到房源。",
     "backToSearch": "← 返回搜索",
-    "loadError": "无法加载房源信息。"
+    "loadError": "无法加载房源信息。",
+    "promoTitle": "优惠活动",
+    "promo6m": "按6个月周期支付可享3%租金折扣",
+    "promo12m": "按12个月周期支付可享5%租金折扣"
   },
   "search": {
     "title": "搜索房间和公寓",
