@@ -11,7 +11,15 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "playwright test --project=finder-smoke-chromium --project=admin-smoke-chromium --project=super-admin-smoke-chromium",
+    "test:e2e:all-projects": "playwright test",
+    "test:e2e:session-admin": "playwright test --project=admin-session-chromium",
+    "test:e2e:session-super-admin": "playwright test --project=super-admin-session-chromium",
+    "test:e2e:authenticated-admin": "cross-env E2E_RUN_AUTHENTICATED=1 playwright test --project=admin-authenticated-chromium",
+    "test:e2e:authenticated-super-admin": "cross-env E2E_RUN_SUPER_AUTHENTICATED=1 playwright test --project=super-admin-authenticated-chromium",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:install": "playwright install chromium"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

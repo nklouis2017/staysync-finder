@@ -1,3 +1,2 @@
-// Re-export the base fixture from the package
-// Override or extend test/expect here if needed
-export { test, expect } from "lovable-agent-playwright-config/fixture";
+// Extend with shared fixtures (storageState, logged-in user) in the E2E hub or here.
+export { expect, test } from "@playwright/test";
