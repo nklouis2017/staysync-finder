@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Search, Heart, Building2, MapPin } from 'lucide-react';
+import { Home, Search, Heart, Building2, MapPin, BadgePercent } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const navItems = [
   { to: '/', icon: Home, labelKey: 'nav.home' },
   { to: '/search', icon: Search, labelKey: 'nav.search' },
   { to: '/search/map', icon: MapPin, labelKey: 'nav.map' },
+  { to: '/promotions', icon: BadgePercent, labelKey: 'nav.promotions', defaultLabel: 'Ưu đãi' },
   { to: '/saved', icon: Heart, labelKey: 'nav.saved' },
   { to: '/policy?tab=about', icon: Building2, labelKey: 'nav.about' },
 ];
@@ -34,8 +35,8 @@ export const MobileBottomNav = () => {
                 active ? 'text-primary' : 'text-muted-foreground'
               }`}
             >
-              <item.icon size={20} />
-              <span className="text-[10px] font-medium">{t(item.labelKey)}</span>
+              <item.icon size={18} />
+              <span className="text-[10px] font-medium leading-tight">{t(item.labelKey, item.defaultLabel ?? '')}</span>
             </Link>
           );
         })}

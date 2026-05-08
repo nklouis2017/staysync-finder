@@ -70,8 +70,8 @@ export const ProvincePickerModal = ({
     if (!k) return provinces;
     return provinces.filter(
       (p) =>
-        p.fullName.toLowerCase().includes(k) ||
-        (p.fullNameEn || "").toLowerCase().includes(k),
+        p.name.toLowerCase().includes(k) ||
+        (p.nameEn || "").toLowerCase().includes(k),
     );
   }, [provinces, keyword]);
 
@@ -81,7 +81,7 @@ export const ProvincePickerModal = ({
     let name = choice.name;
     if (!name) {
       const found = provinces.find((p) => p.code === choice.code);
-      name = found?.fullName || DEFAULT_PROVINCE_NAME;
+      name = found?.name || DEFAULT_PROVINCE_NAME;
     }
     setProvince(choice.code, name);
     onOpenChange(false);
@@ -189,7 +189,7 @@ export const ProvincePickerModal = ({
                   <button
                     key={p.code}
                     type="button"
-                    onClick={() => setSelected({ code: p.code, name: p.fullName })}
+                    onClick={() => setSelected({ code: p.code, name: p.name })}
                     className={cn(
                       "w-full flex items-center gap-2 px-4 py-2.5 text-left text-sm transition-colors",
                       active

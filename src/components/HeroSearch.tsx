@@ -17,10 +17,9 @@ import { useSelectedProvince } from "@/hooks/useSelectedProvince";
 import { getProvinceBias } from "@/lib/province-geo";
 
 import heroBanner1 from "@/assets/hero-banner-1.jpg";
-import heroBanner2 from "@/assets/hero-banner-2.jpg";
 import heroBanner3 from "@/assets/hero-banner-3.jpg";
 
-const bannerImages = [heroBanner1, heroBanner2, heroBanner3];
+const bannerImages = [heroBanner1, heroBanner3];
 
 export const HeroSearch = () => {
   const navigate = useNavigate();
@@ -151,10 +150,10 @@ export const HeroSearch = () => {
 
   const advancedFilterCount = [wardId, priceUuid, sizeUuid, apartmentTypeUuid].filter(Boolean).length;
 
-  // Ưu tiên fullNameEn để bias Nominatim chính xác hơn.
+  // Ưu tiên nameEn để bias Nominatim chính xác hơn.
   const provinceEnrich =
-    provinces.find((p) => p.code === provinceId)?.fullNameEn ||
-    provinces.find((p) => p.code === provinceId)?.fullName ||
+    provinces.find((p) => p.code === provinceId)?.nameEn ||
+    provinces.find((p) => p.code === provinceId)?.name ||
     provinceName ||
     "";
 
@@ -356,38 +355,8 @@ export const HeroSearch = () => {
                 </motion.div>
               )}
 
-              {/* Banner 2: Promo */}
+              {/* Banner 2: Repeat branding or different content */}
               {currentBanner === 1 && (
-                <motion.div
-                  key="slide-promo"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
-                  className="text-center absolute inset-0 flex flex-col items-center justify-center"
-                >
-                  <p className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
-                    Xanh<span className="text-primary">Stay</span>
-                  </p>
-                  <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-3 md:px-6 md:py-3.5 text-center max-w-md">
-                    <p className="text-white/80 text-xs md:text-sm mb-2">Thanh toán càng dài, Chi phí càng giảm</p>
-                    <div className="flex items-center justify-center gap-3 md:gap-5">
-                      <div className="text-center">
-                        <p className="text-amber-300 font-bold text-xl md:text-2xl leading-none">3%</p>
-                        <p className="text-white/70 text-[10px] md:text-xs mt-0.5">Trả trước 6 tháng</p>
-                      </div>
-                      <span className="w-px h-8 bg-white/25" />
-                      <div className="text-center">
-                        <p className="text-amber-300 font-bold text-xl md:text-2xl leading-none">5%</p>
-                        <p className="text-white/70 text-[10px] md:text-xs mt-0.5">Trả trước 12 tháng</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-              {/* Banner 3: Repeat branding or different content */}
-              {currentBanner === 2 && (
                 <motion.div
                   key="slide-brand2"
                   initial={{ opacity: 0, y: 20 }}

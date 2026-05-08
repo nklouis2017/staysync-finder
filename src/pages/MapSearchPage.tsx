@@ -162,11 +162,11 @@ const MapSearchPage = () => {
     const parts: string[] = [];
     if (wardId) {
       const ward = wards.find((w) => w.code === wardId);
-      if (ward) parts.push(ward.fullName);
+      if (ward) parts.push(ward.name);
     }
     if (provinceId) {
       const province = provinces.find((p) => p.code === provinceId);
-      if (province) parts.push(province.fullName);
+      if (province) parts.push(province.name);
     } else if (selectedProvinceName) {
       parts.push(selectedProvinceName);
     }

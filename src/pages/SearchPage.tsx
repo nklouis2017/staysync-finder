@@ -117,15 +117,15 @@ const SearchPage = () => {
       }),
   });
 
-  // Build enriched suffix for autocomplete — dùng fullNameEn để bias Nominatim chính xác hơn.
+  // Build enriched suffix for autocomplete — dùng nameEn để bias Nominatim chính xác hơn.
   const enrichSuffix = useMemo(() => {
     const parts: string[] = [];
     if (wardId) {
       const ward = wards.find((w) => w.code === wardId);
-      if (ward) parts.push(ward.fullNameEn || ward.fullName);
+      if (ward) parts.push(ward.nameEn || ward.name);
     }
     const provinceFromList = provinceId ? provinces.find((p) => p.code === provinceId) : undefined;
-    const provinceLabel = provinceFromList?.fullNameEn || provinceFromList?.fullName || selectedProvinceName || "";
+    const provinceLabel = provinceFromList?.nameEn || provinceFromList?.name || selectedProvinceName || "";
     if (provinceLabel) parts.push(provinceLabel);
     return parts.join(" ");
   }, [provinceId, wardId, provinces, wards, selectedProvinceName]);

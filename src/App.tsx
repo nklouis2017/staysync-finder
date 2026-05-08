@@ -10,6 +10,7 @@ import PropertyDetail from "./pages/PropertyDetail.tsx";
 import SavedRooms from "./pages/SavedRooms.tsx";
 import TermsPage from "./pages/TermsPage.tsx";
 import MapSearchPage from "./pages/MapSearchPage.tsx";
+import PromotionsPage from "./pages/PromotionsPage.tsx";
 
 import NotFound from "./pages/NotFound.tsx";
 import { ScrollToTop } from "./components/ScrollToTop.tsx";
@@ -42,6 +43,7 @@ const App = () => (
           <Route path="/advertisement/:id" element={<PropertyDetail />} />
           <Route path="/saved" element={<SavedRooms />} />
           <Route path="/policy" element={<TermsPage />} />
+          <Route path="/promotions" element={<PromotionsPage />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

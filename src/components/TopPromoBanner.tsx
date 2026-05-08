@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { X, Megaphone } from "lucide-react";
 
 const promoMessages = [
-  "🎉 Ưu đãi đặc biệt: Thanh toán trước 6 tháng giảm 3%, 12 tháng giảm 5%!",
+  "🎉 Chào mừng đại lễ 30/04 và Quốc tế lao động 01/05!",
   "📱 Tải app XanhStay để nhận thông báo phòng mới ngay lập tức!",
   "🏠 Đăng phòng miễn phí trên XanhStay — Tiếp cận hàng nghìn người thuê!",
 ];
@@ -44,7 +44,7 @@ export const TopPromoBanner = () => {
           </div>
         </div>
         <button
-          onClick={() => setVisible(false)}
+          onClick={() => setVisible(true)}
           className="shrink-0 ml-2 mr-1 p-0.5 rounded hover:bg-primary-foreground/20 transition-colors"
           aria-label="Đóng"
         >
